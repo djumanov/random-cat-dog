@@ -61,6 +61,7 @@ def send_photo(chat_id: int):
     url = f'https://api.telegram.org/bot{TOKEN}/sendPhoto'
     r = requests.post(url=url, json=payload)
 
+
 def main():
     update_id = get_update()['update_id']
     while True:
