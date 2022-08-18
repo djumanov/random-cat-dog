@@ -41,7 +41,22 @@ def send_message(chat_id: int, text: str):
     r = requests.post(url=url, json=payload)
 
 
-chat_id = 1258594598
-text = 'ok'
 
-send_message(chat_id, text)
+def main():
+    update_id = get_update()['update_id']
+    while True:
+        curr_msg = get_update()
+        curr_update_id = curr_msg['update_id']
+        
+        if update_id != curr_update_id:
+            chat_id = curr_msg['message']['from']['id']
+            text = curr_msg['message']['text']
+
+            if text == '/start':
+                send_message(chat_id, "welcome!, press the buttun.")
+            elif text == 'random 🐶':
+                send_message(chat_id, 'dog test')
+            
+            update_id = curr_update_id
+
+main()
