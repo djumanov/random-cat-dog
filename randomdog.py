@@ -53,6 +53,14 @@ def get_dog():
         return dog
 
 
+def send_photo(chat_id: int):
+    '''send to someone a photo.'''
+
+    payload = dict([('chat_id', chat_id), ('photo', get_dog())])
+
+    url = f'https://api.telegram.org/bot{TOKEN}/sendPhoto'
+    r = requests.post(url=url, json=payload)
+
 def main():
     update_id = get_update()['update_id']
     while True:
@@ -66,7 +74,7 @@ def main():
             if text == '/start':
                 send_message(chat_id, "welcome!, press the buttun.")
             elif text == 'random 🐶':
-                send_message(chat_id, get_dog())
+                send_photo(chat_id)
             
             update_id = curr_update_id
 
