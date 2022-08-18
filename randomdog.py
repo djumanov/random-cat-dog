@@ -16,10 +16,26 @@ def get_update() -> dict:
     return False
 
 
+def buttun():
+    '''create button'''
+    btn = [
+        [{'text': 'random 🐶'}]
+    ]
+    return btn
+
+
+def keyboard():
+    '''create keyboard'''
+    kbd = {
+        'keyboard': buttun()
+    }
+    return kbd
+
+
 def send_message(chat_id: int, text: str):
     '''send to someone a message with button.'''
 
-    payload = dict([('chat_id', chat_id), ('text', text)])
+    payload = dict([('chat_id', chat_id), ('text', text), ('reply_markup', keyboard())])
 
     url = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
     r = requests.post(url=url, json=payload)
