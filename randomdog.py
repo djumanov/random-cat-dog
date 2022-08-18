@@ -15,4 +15,17 @@ def get_update() -> dict:
         return last_message
     return False
 
-print(get_update())
+
+def send_message(chat_id: int, text: str):
+    '''send to someone a message with button.'''
+
+    payload = dict([('chat_id', chat_id), ('text', text)])
+
+    url = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
+    r = requests.post(url=url, json=payload)
+
+
+chat_id = 1258594598
+text = 'ok'
+
+send_message(chat_id, text)
