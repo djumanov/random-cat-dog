@@ -41,6 +41,17 @@ def send_message(chat_id: int, text: str):
     r = requests.post(url=url, json=payload)
 
 
+def get_dog():
+    '''get random dog.'''
+
+    url = 'https://random.dog/woof.json'
+    r = requests.get(url=url)
+
+    if r.status_code == 200:
+        dog = r.json()['url']
+
+        return dog
+
 
 def main():
     update_id = get_update()['update_id']
@@ -55,7 +66,7 @@ def main():
             if text == '/start':
                 send_message(chat_id, "welcome!, press the buttun.")
             elif text == 'random 🐶':
-                send_message(chat_id, 'dog test')
+                send_message(chat_id, get_dog())
             
             update_id = curr_update_id
 
