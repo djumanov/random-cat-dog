@@ -1,3 +1,4 @@
+from pydoc import text
 import requests
 
 TOKEN = '2052338771:AAHWqySU9KeCy3P_7i-2cLm3Fn78dLKG2RY'
@@ -54,10 +55,26 @@ def get_dog():
         return dog
 
 
-def send_photo(chat_id: int):
-    '''send to someone a photo.'''
+def get_cat():
+    '''get cat's photo url'''
 
-    payload = dict([('chat_id', chat_id), ('photo', get_dog())])
+    url = 'https://aws.random.cat/meow'
+    r = requests.get(url=url)
+
+    if r.status_code == 200:
+        cat = r.json()['file']
+
+        return cat
+
+
+def send_photo(chat_id: int, text: str):
+    '''send to someone a photo.'''
+    if text == 'cat 😺':
+        photo = get_cat()
+    else:
+        photo = get_dog()
+
+    payload = dict([('chat_id', chat_id), ('photo', photo)])
 
     url = f'https://api.telegram.org/bot{TOKEN}/sendPhoto'
     r = requests.post(url=url, json=payload)
@@ -75,8 +92,10 @@ def main():
 
             if text == '/start':
                 send_message(chat_id, "welcome!, press the buttun.")
+            elif text == 'cat 😺':
+                send_photo(chat_id, text)
             elif text == 'random 🐶':
-                send_photo(chat_id)
+                send_photo(chat_id, text)
             
             update_id = curr_update_id
 
