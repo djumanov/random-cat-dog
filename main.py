@@ -1,4 +1,3 @@
-from pydoc import text
 import requests
 
 TOKEN = '2052338771:AAHWqySU9KeCy3P_7i-2cLm3Fn78dLKG2RY'
