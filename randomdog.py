@@ -19,7 +19,8 @@ def get_update() -> dict:
 def buttun():
     '''create button'''
     btn = [
-        [{'text': 'random 🐶'}]
+        [{'text': 'cat 😺'}],
+        [{'text': 'random 🐶'}],
     ]
     return btn
 
